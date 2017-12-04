@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container main_content">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-12 left_side">
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12 posts_container">
+                <div class="one_ad_post clearfix">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Объявления</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{ ad.get_advert_type_display }}</a></li>
+                        <li class="breadcrumb-item active">{{ ad.get_categories_display }}</li>
+                    </ol>
+                    <div class="date_block">
+                        <span>{{ ad.date }}</span>
+                    </div>
+                    <div class="post_images no_padding">
+                        {% for i in ad.media.all %}
+                            <div class="img_rect"><img src="{{ i.media_file.url }}" alt="" onerror="CleanFunc(this)">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="post_describe no_padding">
+                        <div class="post_title">
+                            <h2>{{ ad.title }}</h2>
+                        </div>
+                        <div class="post_describe_text">
+                            <p>{{ ad.text |safe }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-3 right_side">
+                <div class="right_banner sticky-top">
+                    <a href="#"><img src="{% static 'img/banner2.png' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container main_content">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-12 left_side">
+                <div class="left_panel sticky-top">
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12 form_container">
+                <form action="{% url 'ad:ad_create' %}" method="POST"
+{#                      data-remove-uploaded-media-url="{% url 'ad:remove_uploaded_media' %}"#}
+                      data-media-upload-url="{% url 'ad:upload_media' %}">{% csrf_token %}
+                    <div class="form_row"><label for="name">Ваше имя</label>{{ form.name }}</div>
+                    <div class="form_row"><label for="email">Ваш Email</label>{{ form.email }}</div>
+                    <div class="form_row"><label for="title">Введите заголовок</label>{{ form.title }}
+                    </div>
+
+                    <div class="form_row"><label for="advert_type">Тип объявления</label>{{ form.advert_type }}
+                    </div>
+                    <div class="form_row"><label for="advert_category">Выберите
+                        категорию</label>{{ form.categories }}</div>
+                    <div class="form_row"><label>Выберите картинку не более 1 мб</label><label for="advert_images"
+                                                                                               class="advert_images">Выберите
+                        файл</label><input type="file" name="images" id="advert_images" multiple>{{ form.images }}
+                        {{ form.removed_images }}
+                    </div>
+                    <div class="form-row">
+                        <div id="upload-images-row"></div>
+                    </div>
+                    <div class="form_row"><textarea name="text" id="ad_text" cols="30" rows="10"
+                                                    placeholder="Введите текст объявления"></textarea></div>
+                    <div class="form_row">{{ form.agree_with_rules }}<label for="agree_with_rules">Я
+                        согласен с <a href="#">правилами</a></label></div>
+
+                    <input type="submit" placeholder="Отправить">
+                </form>
+
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-3 right_side">
+                <div class="right_banner sticky-top">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_scripts %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    <script src="{% static 'js/advert.js' %}"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('ad_text');
+    </script>
+{% endblock %}

@@ -1,0 +1,6 @@
+DB_NAME = 'ferma'
+DB_USER = 'root'
+DB_PASS = ''
+ROOT_FOLDER = 'fermanew'
+EMAIL_USER = 'jackmovies01@gmail.com'
+EMAIL_PASSWORD = '124358911nurs'

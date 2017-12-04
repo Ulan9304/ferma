@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container main_content">
+        <div class="row">
+            <div class="tab-content" style="width: 100%;">
+                <div class="col-md-8 col-sm-12 col-xs-12 posts_container" style="display: block;margin: auto">
+                    {% for i in news_ad %}
+                        <div class="post clearfix">
+                            <div class="post_image col-md-4 col-sm-4 col-xs-12 no_padding">
+                                <img src="{{ i.image }}" alt="" onerror="CleanFunc(this)">
+                            </div>
+                            <div class="post_describe col-md-8 col-sm-8 col-xs-12 no_padding">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Новости</a></li>
+                                    <li class="breadcrumb-item"><a href="#">{{ i.get_advert_type_display }}</a>
+                                </ol>
+                                <div class="date_block">
+                                    <span>{{ i.date }}</span>
+                                </div>
+                                <div class="post_title">
+                                    <h2>{{ i.title }}</h2>
+                                </div>
+                                <div class="post_describe_text">
+                                    <p>{{ i.text | safe |truncatechars:'50' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

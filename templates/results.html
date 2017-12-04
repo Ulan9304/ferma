@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container main_content">
+        <div class="row">
+            <div class="tab-content" style="width: 100%;">
+                <div class="col-md-8 col-sm-12 col-xs-12 posts_container" style="display: block;margin: auto">
+                    {% for i in results %}
+                        {% if not forloop.counter|divisibleby:4 %}
+                            <div class="post clearfix">
+                                <div class="post_image col-md-4 col-sm-4 col-xs-12 no_padding">
+                                    <img src="{{ i.media.first.media_file.url }}" alt="" onerror="CleanFunc(this)">
+                                </div>
+                                <div class="post_describe col-md-8 col-sm-8 col-xs-12 no_padding">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Объявления</a></li>
+                                        <li class="breadcrumb-item"><a href="#">{{ i.get_advert_type_display }}</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">{{ i.get_categories_display }}</li>
+                                    </ol>
+                                    <div class="date_block">
+                                        <span>{{ i.date }}</span>
+                                    </div>
+                                    <div class="post_title">
+                                        <h2>{{ i.title }}</h2>
+                                    </div>
+                                    <div class="post_describe_text">
+                                        <p>{{ i.text | safe }}</p>
+                                    </div>
+                                    <div class="more_block">
+                                        <a href="{% url 'ad:view_more' i.id %}" class="show_more">показать</a>
+                                        <a href="#" class="reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="banner_post clearfix">
+                                <img src="{{ i.image.url }}" alt="">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center mt-4">
+                            <li class="page-item">
+                                {% if pages.has_other_pages %}
+                                    {% if pages.has_previous %}
+                                        <a class="page-link" href="?page={{ pages.previous_page_number }}"
+                                           aria-hidden="true">&laquo;</a>
+                                    {% endif %}
+                                    </a>
+                                    </li>
+                                    {% for i in pages.paginator.page_range %}
+                                        {% if pages.number == i %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ i }}">{{ i }}</a></li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if pages.has_next %}
+                                        <a class="page-link" href="?page={{ pages.next_page_number }}"
+                                           aria-hidden="true">&raquo;</a>
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
