@@ -9,8 +9,9 @@
             </div>
             <div class="col-md-8 col-sm-8 col-xs-12 form_container">
                 <form action="{% url 'ad:ad_create' %}" method="POST"
-{#                      data-remove-uploaded-media-url="{% url 'ad:remove_uploaded_media' %}"#}
-                      data-media-upload-url="{% url 'ad:upload_media' %}">{% csrf_token %}
+                        {#                      data-remove-uploaded-media-url="{% url 'ad:remove_uploaded_media' %}"#}
+                      data-media-upload-url="{% url 'ad:upload_media' %}">
+                    {% csrf_token %}
                     <div class="form_row"><label for="name">Ваше имя</label>{{ form.name }}</div>
                     <div class="form_row"><label for="email">Ваш Email</label>{{ form.email }}</div>
                     <div class="form_row"><label for="title">Введите заголовок</label>{{ form.title }}
@@ -28,14 +29,12 @@
                     <div class="form-row">
                         <div id="upload-images-row"></div>
                     </div>
-                    <div class="form_row"><textarea name="text" id="ad_text" cols="30" rows="10"
-                                                    placeholder="Введите текст объявления"></textarea></div>
+                    <div class="form_row">{{ form.text }}</div>
                     <div class="form_row">{{ form.agree_with_rules }}<label for="agree_with_rules">Я
                         согласен с <a href="#">правилами</a></label></div>
 
                     <input type="submit" placeholder="Отправить">
                 </form>
-
             </div>
             <div class="col-md-2 col-sm-2 col-xs-3 right_side">
                 <div class="right_banner sticky-top">

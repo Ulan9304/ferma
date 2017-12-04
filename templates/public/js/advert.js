@@ -86,7 +86,7 @@ $(document).ready(function () {
             $(trueFileInput).val(value !== '' ? value + ',' + obj : obj);
         });
         console.log($(trueFileInput).val());
-        console.log($(this).serialize())
+        console.log($(this).serialize());
         this.submit();
     });
 
